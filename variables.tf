@@ -1,12 +1,12 @@
 variable "project_id" {
   type    = string
-  default = "csye712522"
+  default = "csye712525"
 }
 
 variable "project" {
   description = "The project name"
   type        = string
-  default     = "csye712522"
+  default     = "csye712525"
 }
 
 variable "region" {
@@ -24,7 +24,7 @@ variable "zone" {
 variable "org_id" {
   description = "The organization ID"
   type        = string
-  default     = "370221421887"
+  default     = "1016967897354"
 }
 
 variable "service-name" {
@@ -53,7 +53,13 @@ variable "services" {
 variable "key-path" {
   description = "key path for service acc json"
   type        = string
-  default     = "/Users/sandy/serviceacc.json"
+  default     = "/home/roadrunner/serviceacc.json"
+}
+
+variable "emailacc" {
+  description = "user email acc to be appended to IAM"
+  type        = string
+  default     = "kckkule@gmail.com"
 }
 
 variable "rolesList" {

@@ -13,35 +13,14 @@ resource "google_project" "project" {
 
 }
 
-# data "google_iam_policy" "admin" {
-#   binding {
-#     role = "roles/iam.serviceAccounts.create"
+resource "google_organization_policy" "serial_port_policy" {
+  org_id     = var.org_id
+  constraint = "compute.skipDefaultNetworkCreation"
+  boolean_policy { enforced = true }
+}
 
-#     members = [
-#       "user:sandeepbharatwagh26@gmail.com",
-#     ]
-#   }
-# }
-
-
-
-
-# Use `gcloud` to enable:
-# - serviceusage.googleapis.com
-# # - cloudresourcemanager.googleapis.com
-# resource "null_resource" "enable_service_usage_api" {
-#   provisioner "local-exec" {
-#     command = "gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com --project ${var.project_id}"
-#   }
-
-#   depends_on = [google_project.project]
-# }
-
-# Wait for the new configuration to propagate
-# (might be redundant)
 resource "time_sleep" "wait_project_init" {
   create_duration = "120s"
-
   depends_on = [google_project.project]
 }
 
@@ -55,17 +34,6 @@ resource "google_project_service" "gcp_services" {
 
   depends_on = [time_sleep.wait_project_init]
 }
-# Enable other services used in the project
-# resource "google_project_service" "services" {
-#   for_each = toset(var.services)
-
-#   project                    = var.project_id
-#   service                    = each.key
-#   disable_dependent_services = false
-#   disable_on_destroy         = false
-
-#   depends_on = [time_sleep.wait_project_init]
-# }
 
 #Create Service Account any append to project
 resource "google_service_account" "default" {
@@ -81,10 +49,10 @@ resource "google_project_iam_binding" "cloudsql-sa-cloudsql-admin-role" {
   role  = var.rolesList[count.index]
   members = [
     "serviceAccount:${google_service_account.default.email}",
-     "user:sandeepbharatwagh26@gmail.com",
-  
+    "user:${var.emailacc}",
+
   ]
-  project = var.project
+  project    = var.project
   depends_on = [google_service_account.default]
 
 }
