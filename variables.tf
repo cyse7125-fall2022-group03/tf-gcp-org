@@ -1,12 +1,12 @@
 variable "project_id" {
   type    = string
-  default = "csye-7125-team3"
+  default = "csye712513"
 }
 
 variable "project" {
   description = "The project name"
   type        = string
-  default     = "csye-7125"
+  default     = "csye712513"
 }
 
 variable "region" {
@@ -24,13 +24,22 @@ variable "zone" {
 variable "org_id" {
   description = "The organization ID"
   type        = string
-  default     = "1025277680562"
+  default     = "370221421887"
 }
 
 variable "service-name" {
   description = "The service account name"
   type        = string
   default     = "service"
+}
+
+variable "project_services" {
+type = list
+default = [
+"compute.googleapis.com",
+"cloudresourcemanager.googleapis.com",
+"servicenetworking.googleapis.com",
+]
 }
 
 variable "services" {
