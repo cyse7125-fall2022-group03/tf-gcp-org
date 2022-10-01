@@ -80,7 +80,9 @@ resource "google_project_iam_binding" "cloudsql-sa-cloudsql-admin-role" {
   count = length(var.rolesList)
   role  = var.rolesList[count.index]
   members = [
-    "serviceAccount:${google_service_account.default.email}"
+    "serviceAccount:${google_service_account.default.email}",
+     "user:sandeepbharatwagh26@gmail.com",
+  
   ]
   project = var.project
   depends_on = [google_service_account.default]
