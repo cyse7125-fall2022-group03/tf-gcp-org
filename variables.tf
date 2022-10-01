@@ -1,12 +1,12 @@
 variable "project_id" {
   type    = string
-  default = "csye712513"
+  default = "csye712516"
 }
 
 variable "project" {
   description = "The project name"
   type        = string
-  default     = "csye712513"
+  default     = "csye712516"
 }
 
 variable "region" {
@@ -34,12 +34,12 @@ variable "service-name" {
 }
 
 variable "project_services" {
-type = list
-default = [
-"compute.googleapis.com",
-"cloudresourcemanager.googleapis.com",
-"servicenetworking.googleapis.com",
-]
+  type = list(any)
+  default = [
+    "compute.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "servicenetworking.googleapis.com",
+  ]
 }
 
 variable "services" {
@@ -49,3 +49,25 @@ variable "services" {
 
   ]
 }
+
+variable "key-path" {
+  description = "key path for service acc json"
+  type        = string
+  default     = "/Users/sandy/serviceacc.json"
+}
+
+variable "rolesList" {
+
+  type = list(string)
+
+  default = ["roles/storage.admin", "roles/pubsub.admin",
+   "roles/resourcemanager.organizationAdmin",
+   "roles/iam.securityAdmin",
+   "roles/owner",
+   "roles/editor",
+   "roles/servicemanagement.admin",
+   "roles/iam.serviceAccountKeyAdmin",
+   "roles/compute.admin"]
+}
+
+
