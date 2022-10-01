@@ -1,12 +1,12 @@
 variable "project_id" {
   type    = string
-  default = "csye712517"
+  default = "csye712522"
 }
 
 variable "project" {
   description = "The project name"
   type        = string
-  default     = "csye712517"
+  default     = "csye712522"
 }
 
 variable "region" {
